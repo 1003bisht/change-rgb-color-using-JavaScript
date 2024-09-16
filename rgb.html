@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    
+    <title>Change the color</title>
+    <style>
+        body{
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        #colorbox{
+            width: 200px;
+           height: 200px;
+           margin: 0 auto;
+            border: 2px solid black;
+        }
+        #COPYBUTTON{
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        #COPYBUTTON:hover{
+             background-color: rgba(1,93,1,0.76);
+             color: rgb(10,100,200);
+             
+        }
+
+        
+    </style>
+  </head>
+  <body>
+    <h1>RGB COLOR GENERATOR</h1>
+    <div id="colorbox"></div>
+    <p id="colorcode"></p>
+    <button onclick="generateNewColorBtn()">GenerateNewColor</button><br>
+    <button id="COPYBUTTON">CopyColorCode</button>
+    <script>
+        const GenerateRGBColor = () => {
+            const r= Math.floor(Math.random() * 255);
+            const g= Math.floor(Math.random() * 255);
+
+            const b= Math.floor(Math.random() * 255);
+           return `rgb(${r},${g},${b})`;
+
+        }
+        const UpdateColor = () => {
+          const color=GenerateRGBColor();
+          const colorbox=document.getElementById('colorbox');
+          const colorcode=document.getElementById('colorcode');
+          colorbox.style.backgroundColor=color;
+          colorcode.innerText=color;
+        }
+        const copycolorcode = () => {
+          const colorcode=document.getElementById('colorcode');
+          const inputTag=document.createElement('input');
+          document.body.appendChild(inputTag);
+          inputTag.value=colorcode.innerText;
+
+          inputTag.select();
+          document.execCommand('copy');
+          document.body.removeChild(inputTag);
+          alert('color copied to clipboard');
+        }
+        document.getElementById('COPYBUTTON').addEventListener('click', () => {
+          copycolorcode();
+        })
+
+        function generateNewColorBtn(){
+          UpdateColor();
+        }
+        
+    </script>
+
+   
+  </body>
+</html>
